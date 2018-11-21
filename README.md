@@ -51,13 +51,11 @@
 ## Introduction
 
 Software engineering principles, from Robert C. Martin's book
-[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
-adapted for PHP. This is not a style guide. It's a guide to producing
-readable, reusable, and refactorable software in PHP.
+[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882), adapted for PHP. 
+This is not a style guide. It's a guide to producing readable, reusable, and refactorable software in PHP.
 
-Not every principle herein has to be strictly followed, and even fewer will be universally 
-agreed upon. These are guidelines and nothing more, but they are ones codified over many 
-years of collective experience by the authors of *Clean Code*.
+Not every principle herein has to be strictly followed, and even fewer will be universally agreed upon. 
+These are guidelines and nothing more, but they are ones codified over many years of collective experience by the authors of *Clean Code*.
 
 Although many developers still use PHP 5, most of the examples in this article only work with PHP 7.1+.
 
@@ -107,9 +105,8 @@ getUser();
 
 ### Use searchable names (part 1)
 
-We will read more code than we will ever write. It's important that the code we do write is 
-readable and searchable. By *not* naming variables that end up being meaningful for 
-understanding our program, we hurt our readers.
+We will read more code than we will ever write. It's important that the code we do write is readable and searchable. 
+By *not* naming variables that end up being meaningful for understanding our program, we hurt our readers.
 Make your names searchable.
 
 **Bad:**
@@ -195,8 +192,7 @@ saveCityZipCode($matches['city'], $matches['zipCode']);
 
 ### Avoid nesting too deeply and return early (part 1)
 
-Too many if-else statements can make your code hard to follow. Explicit is better
-than implicit.
+Too many if-else statements can make your code hard to follow. Explicit is better than implicit.
 
 **Bad:**
 
@@ -287,8 +283,7 @@ function fibonacci(int $n): int
 
 ### Avoid Mental Mapping
 
-Don’t force the reader of your code to translate what the variable means.
-Explicit is better than implicit.
+Don’t force the reader of your code to translate what the variable means. Explicit is better than implicit.
 
 **Bad:**
 
@@ -326,8 +321,7 @@ foreach ($locations as $location) {
 
 ### Don't add unneeded context
 
-If your class/object name tells you something, don't repeat that in your
-variable name.
+If your class/object name tells you something, don't repeat that in your variable name.
 
 **Bad:**
 
@@ -445,10 +439,9 @@ Uncle Bob said:
 > They should do it well.
 > They should do it only."
 
-This is by far the most important rule in software engineering. When functions do more 
-than one thing, they are harder to compose, test, and reason about. When you can isolate 
-a function to just one action, they can be refactored easily and your code will read much 
-cleaner. 
+This is by far the most important rule in software engineering. 
+When functions do more than one thing, they are harder to compose, test, and reason about. 
+When you can isolate a function to just one action, they can be refactored easily and your code will read much cleaner. 
 
 **Bad:**
 ```php
@@ -491,8 +484,6 @@ function isClientActive(int $client): bool
 Ward's principle:
 > "You know you are waking on clean code when each routine turns out to be pretty much what you expected."
 
-
-
 **Bad:**
 
 ```php
@@ -533,9 +524,8 @@ $message->send();
 
 ### Functions should only be one level of abstraction
 
-When you have more than one level of abstraction your function is usually
-doing too much. Splitting up functions leads to reusability and easier
-testing.
+When you have more than one level of abstraction your function is usually doing too much. 
+Splitting up functions leads to reusability and easier testing.
 
 **Bad:**
 
@@ -671,14 +661,12 @@ class BetterJSAlternative
 
 ### Function arguments (2 or fewer ideally)
 
-Limiting the amount of function parameters is incredibly important because it makes 
-testing your function easier. Having more than three leads to a combinatorial explosion 
-where you have to test tons of different cases with each separate argument.
+Limiting the amount of function parameters is incredibly important because it makes testing your function easier. 
+Having more than three leads to a combinatorial explosion where you have to test tons of different cases with each separate argument.
 
 Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
-Anything more than that should be consolidated. Usually, if you have more than two 
-arguments then your function is trying to do too much. In cases where it's not, most 
-of the time a higher-level object will suffice as an argument.
+Anything more than that should be consolidated. Usually, if you have more than two arguments then your function is trying to do too much. 
+In cases where it's not, most of the time a higher-level object will suffice as an argument.
 
 **Bad:**
 
@@ -716,9 +704,8 @@ function createMenu(MenuConfig $config): void
 
 ### Don't use flags as function parameters
 
-Flags tell your user that this function does more than one thing. Functions should 
-do one thing. Split out your functions if they are following different code paths 
-based on a boolean.
+Flags tell your user that this function does more than one thing. Functions should do one thing. 
+Split out your functions if they are following different code paths based on a boolean.
 
 **Bad:**
 
@@ -751,19 +738,18 @@ function createTempFile(string $name): void
 
 ### Avoid Side Effects
 
-A function produces a side effect if it does anything other than take a value in and 
-return another value or values. A side effect could be writing to a file, modifying 
-some global variable, or accidentally wiring all your money to a stranger.
+A function produces a side effect if it does anything other than take a value in and return another value or values. 
+A side effect could be writing to a file, modifying some global variable, or accidentally wiring all your money to a stranger.
 
-Now, you do need to have side effects in a program on occasion. Like the previous 
-example, you might need to write to a file. What you want to do is to centralize where 
-you are doing this. Don't have several functions and classes that write to a particular 
-file. Have one service that does it. One and only one.
+Now, you do need to have side effects in a program on occasion. 
+Like the previous example, you might need to write to a file. 
+What you want to do is to centralize where you are doing this. 
+Don't have several functions and classes that write to a particular file. 
+Have one service that does it. One and only one.
 
-The main point is to avoid common pitfalls like sharing state between objects without
-any structure, using mutable data types that can be written to by anything, and not 
-centralizing where your side effects occur. If you can do this, you will be happier 
-than the vast majority of other programmers.
+The main point is to avoid common pitfalls like sharing state between objects without any structure, 
+using mutable data types that can be written to by anything, and not  centralizing where your side effects occur. 
+If you can do this, you will be happier than the vast majority of other programmers.
 
 **Bad:**
 
@@ -804,10 +790,9 @@ var_dump($newName); // ['Ryan', 'McDermott'];
 ### Don't write to global functions
 
 Polluting globals is a bad practice in many languages because you could clash with another 
-library and the user of your API would be none-the-wiser until they get an exception in 
-production. Let's think about an example: what if you wanted to have configuration array?
-You could write global function like `config()`, but it could clash with another library 
-that tried to do the same thing.
+library and the user of your API would be none-the-wiser until they get an exception in production. 
+Let's think about an example: what if you wanted to have configuration array?
+You could write global function like `config()`, but it could clash with another library that tried to do the same thing.
 
 **Bad:**
 
@@ -965,14 +950,12 @@ if (isDOMNodePresent($node)) {
 
 ### Avoid conditionals
 
-This seems like an impossible task. Upon first hearing this, most people say,
-"how am I supposed to do anything without an `if` statement?" The answer is that
-you can use polymorphism to achieve the same task in many cases. The second
-question is usually, "well that's great but why would I want to do that?" The
-answer is a previous clean code concept we learned: a function should only do
-one thing. When you have classes and functions that have `if` statements, you
-are telling your user that your function does more than one thing. Remember,
-just do one thing.
+This seems like an impossible task. Upon first hearing this, most people say, "how am I supposed to do anything without an `if` statement?" 
+The answer is that you can use polymorphism to achieve the same task in many cases. 
+The second question is usually, "well that's great but why would I want to do that?" 
+The answer is a previous clean code concept we learned: a function should only do one thing. 
+When you have classes and functions that have `if` statements, you are telling your user that your function does more than one thing. 
+Remember, just do one thing.
 
 **Bad:**
 
@@ -1041,9 +1024,8 @@ class Cessna implements Airplane
 ### Avoid type-checking (part 1)
 
 PHP is untyped, which means your functions can take any type of argument.
-Sometimes you are bitten by this freedom and it becomes tempting to do
-type-checking in your functions. There are many ways to avoid having to do this.
-The first thing to consider is consistent APIs.
+Sometimes you are bitten by this freedom and it becomes tempting to do type-checking in your functions. 
+There are many ways to avoid having to do this. The first thing to consider is consistent APIs.
 
 **Bad:**
 
@@ -1071,14 +1053,12 @@ function travelToTexas(Traveler $vehicle): void
 
 ### Avoid type-checking (part 2)
 
-If you are working with basic primitive values like strings, integers, and arrays,
-and you use PHP 7+ and you can't use polymorphism but you still feel the need to
-type-check, you should consider
-[type declaration](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
-or strict mode. It provides you with static typing on top of standard PHP syntax.
-The problem with manually type-checking is that doing it will require so much
-extra verbiage that the faux "type-safety" you get doesn't make up for the lost
-readability. Keep your PHP clean, write good tests, and have good code reviews.
+If you are working with basic primitive values like strings, integers, and arrays, and you use PHP 7+ 
+and you can't use polymorphism but you still feel the need to type-check, 
+you should consider [type declaration](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) or strict mode. 
+It provides you with static typing on top of standard PHP syntax.
+The problem with manually type-checking is that doing it will require so much extra verbiage that the faux "type-safety" you get doesn't make up for the lost readability. 
+Keep your PHP clean, write good tests, and have good code reviews.
 Otherwise, do all of that but with PHP strict type declaration or strict mode.
 
 **Bad:**
@@ -1107,9 +1087,8 @@ function combine(int $val1, int $val2): int
 
 ### Remove dead code
 
-Dead code is just as bad as duplicate code. There's no reason to keep it in
-your codebase. If it's not being called, get rid of it! It will still be safe
-in your version history if you still need it.
+Dead code is just as bad as duplicate code. There's no reason to keep it in your codebase. 
+If it's not being called, get rid of it! It will still be safe in your version history if you still need it.
 
 **Bad:**
 
@@ -1150,14 +1129,12 @@ inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 In PHP you can set `public`, `protected` and `private` keywords for methods. 
 Using it, you can control properties modification on an object. 
 
-* When you want to do more beyond getting an object property, you don't have
-to look up and change every accessor in your codebase.
+* When you want to do more beyond getting an object property, you don't have to look up and change every accessor in your codebase.
 * Makes adding validation simple when doing a `set`.
 * Encapsulates the internal representation.
 * Easy to add logging and error handling when getting and setting.
 * Inheriting this class, you can override default functionality.
-* You can lazy load your object's properties, let's say getting it from a
-server.
+* You can lazy load your object's properties, let's say getting it from a server.
 
 Additionally, this is part of [Open/Closed](#openclosed-principle-ocp) principle.
 
@@ -1273,19 +1250,15 @@ echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 
 ### Prefer composition over inheritance
 
-As stated famously in [*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four,
-you should prefer composition over inheritance where you can. There are lots of
-good reasons to use inheritance and lots of good reasons to use composition.
-The main point for this maxim is that if your mind instinctively goes for
-inheritance, try to think if composition could model your problem better. In some
-cases it can.
+As stated famously in [*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four, you should prefer composition over inheritance where you can. 
+There are lots of good reasons to use inheritance and lots of good reasons to use composition.
+The main point for this maxim is that if your mind instinctively goes for inheritance, try to think if composition could model your problem better. 
+In some cases it can.
 
-You might be wondering then, "when should I use inheritance?" It
-depends on your problem at hand, but this is a decent list of when inheritance
-makes more sense than composition:
+You might be wondering then, "when should I use inheritance?" 
+It depends on your problem at hand, but this is a decent list of when inheritance makes more sense than composition:
 
-1. Your inheritance represents an "is-a" relationship and not a "has-a"
-relationship (Human->Animal vs. User->UserDetails).
+1. Your inheritance represents an "is-a" relationship and not a "has-a" relationship (Human->Animal vs. User->UserDetails).
 2. You can reuse code from the base classes (Humans can move like all animals).
 3. You want to make global changes to derived classes by changing a base class.
 (Change the caloric expenditure of all animals when they move).
@@ -1369,12 +1342,11 @@ class Employee
 
 ### Avoid fluent interfaces
 
-A [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) is an object
-oriented API that aims to improve the readability of the source code by using
-[Method chaining](https://en.wikipedia.org/wiki/Method_chaining).
+A [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) is an object oriented API 
+that aims to improve the readability of the source code by using [Method chaining](https://en.wikipedia.org/wiki/Method_chaining).
 
-While there can be some contexts, frequently builder objects, where this
-pattern reduces the verbosity of the code (for example the [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
+While there can be some contexts, frequently builder objects, where this pattern reduces the verbosity of the code 
+(for example the [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
 or the [Doctrine Query Builder](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html)),
 more often it comes at some costs:
 
@@ -1551,14 +1523,12 @@ final class Car implements Vehicle
 
 ### Single Responsibility Principle (SRP)
 
-As stated in Clean Code, "There should never be more than one reason for a class
-to change". It's tempting to jam-pack a class with a lot of functionality, like
-when you can only take one suitcase on your flight. The issue with this is
-that your class won't be conceptually cohesive and it will give it many reasons
-to change. Minimizing the amount of times you need to change a class is important.
+As stated in Clean Code, "There should never be more than one reason for a class to change". 
+It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. 
+The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. 
+Minimizing the amount of times you need to change a class is important.
 It's important because if too much functionality is in one class and you modify a piece of it,
-it can be difficult to understand how that will affect other dependent modules in
-your codebase.
+it can be difficult to understand how that will affect other dependent modules in your codebase.
 
 **Bad:**
 
@@ -1628,10 +1598,8 @@ class UserSettings
 
 ### Open/Closed Principle (OCP)
 
-As stated by Bertrand Meyer, "software entities (classes, modules, functions,
-etc.) should be open for extension, but closed for modification." What does that
-mean though? This principle basically states that you should allow users to
-add new functionalities without changing existing code.
+As stated by Bertrand Meyer, "software entities (classes, modules, functions,etc.) should be open for extension, but closed for modification." 
+What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
 
 **Bad:**
 
@@ -1742,18 +1710,15 @@ class HttpRequester
 
 ### Liskov Substitution Principle (LSP)
 
-This is a scary term for a very simple concept. It's formally defined as "If S
-is a subtype of T, then objects of type T may be replaced with objects of type S
-(i.e., objects of type S may substitute objects of type T) without altering any
-of the desirable properties of that program (correctness, task performed,
-etc.)." That's an even scarier definition.
+This is a scary term for a very simple concept. It's formally defined as 
+> "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) 
+> without altering any of the desirable properties of that program (correctness, task performed, etc.)."
+ 
+That's an even scarier definition.
 
-The best explanation for this is if you have a parent class and a child class,
-then the base class and child class can be used interchangeably without getting
-incorrect results. This might still be confusing, so let's take a look at the
-classic Square-Rectangle example. Mathematically, a square is a rectangle, but
-if you model it using the "is-a" relationship via inheritance, you quickly
-get into trouble.
+The best explanation for this is if you have a parent class and a child class, then the base class and child class can be used interchangeably without getting incorrect results. 
+This might still be confusing, so let's take a look at the classic Square-Rectangle example. 
+Mathematically, a square is a rectangle, but if you model it using the "is-a" relationship via inheritance, you quickly get into trouble.
 
 **Bad:**
 
@@ -1870,13 +1835,11 @@ foreach ($shapes as $shape) {
 
 ### Interface Segregation Principle (ISP)
 
-ISP states that "Clients should not be forced to depend upon interfaces that
-they do not use." 
+ISP states that "Clients should not be forced to depend upon interfaces that they do not use." 
 
-A good example to look at that demonstrates this principle is for
-classes that require large settings objects. Not requiring clients to set up
-huge amounts of options is beneficial, because most of the time they won't need
-all of the settings. Making them optional helps prevent having a "fat interface".
+A good example to look at that demonstrates this principle is for classes that require large settings objects. 
+Not requiring clients to set up huge amounts of options is beneficial, because most of the time they won't need all of the settings. 
+Making them optional helps prevent having a "fat interface".
 
 **Bad:**
 
@@ -1962,17 +1925,13 @@ class RobotEmployee implements Workable
 ### Dependency Inversion Principle (DIP)
 
 This principle states two essential things:
-1. High-level modules should not depend on low-level modules. Both should
-depend on abstractions.
-2. Abstractions should not depend upon details. Details should depend on
-abstractions.
+1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+2. Abstractions should not depend upon details. Details should depend on abstractions.
 
-This can be hard to understand at first, but if you've worked with PHP frameworks (like Symfony), you've seen an implementation of this principle in the form of Dependency
-Injection (DI). While they are not identical concepts, DIP keeps high-level
-modules from knowing the details of its low-level modules and setting them up.
-It can accomplish this through DI. A huge benefit of this is that it reduces
-the coupling between modules. Coupling is a very bad development pattern because
-it makes your code hard to refactor.
+This can be hard to understand at first, but if you've worked with PHP frameworks (like Symfony), you've seen an implementation of this principle in the form of Dependency Injection (DI). 
+While they are not identical concepts, DIP keeps high-level modules from knowing the details of its low-level modules and setting them up.
+It can accomplish this through DI. A huge benefit of this is that it reduces the coupling between modules. 
+Coupling is a very bad development pattern because it makes your code hard to refactor.
 
 **Bad:**
 
@@ -2055,26 +2014,21 @@ class Manager
 
 Try to observe the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
 
-Do your absolute best to avoid duplicate code. Duplicate code is bad because 
-it means that there's more than one place to alter something if you need to 
-change some logic.
+Do your absolute best to avoid duplicate code. 
+Duplicate code is bad because it means that there's more than one place to alter something if you need to change some logic.
 
-Imagine if you run a restaurant and you keep track of your inventory: all your 
-tomatoes, onions, garlic, spices, etc. If you have multiple lists that
-you keep this on, then all have to be updated when you serve a dish with
-tomatoes in them. If you only have one list, there's only one place to update!
+Imagine if you run a restaurant and you keep track of your inventory: all your tomatoes, onions, garlic, spices, etc. 
+If you have multiple lists that you keep this on, then all have to be updated when you serve a dish with tomatoes in them. 
+If you only have one list, there's only one place to update!
 
-Often you have duplicate code because you have two or more slightly
-different things, that share a lot in common, but their differences force you
-to have two or more separate functions that do much of the same things. Removing 
-duplicate code means creating an abstraction that can handle this set of different 
-things with just one function/module/class.
+Often you have duplicate code because you have two or more slightly different things, that share a lot in common, 
+but their differences force you to have two or more separate functions that do much of the same things. 
+Removing duplicate code means creating an abstraction that can handle this set of different things with just one function/module/class.
 
-Getting the abstraction right is critical, that's why you should follow the
-SOLID principles laid out in the [Classes](#classes) section. Bad abstractions can be
-worse than duplicate code, so be careful! Having said this, if you can make
-a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself 
-updating multiple places any time you want to change one thing.
+Getting the abstraction right is critical, that's why you should follow the SOLID principles laid out in the [Classes](#classes) section. 
+Bad abstractions can be worse than duplicate code, so be careful! 
+Having said this, if you can make a good abstraction, do it! 
+Don't repeat yourself, otherwise you'll find yourself updating multiple places any time you want to change one thing.
 
 **Bad:**
 
@@ -2151,28 +2105,3 @@ function showList(array $employees): void
 
 **[⬆ back to top](#table-of-contents)**
 
-## Translations
-
-This is also available in other languages:
-
-* :cn: **Chinese:**
-   * [php-cpm/clean-code-php](https://github.com/php-cpm/clean-code-php)
-* :ru: **Russian:**
-   * [peter-gribanov/clean-code-php](https://github.com/peter-gribanov/clean-code-php)
-* :es: **Spanish:**
-   * [fikoborquez/clean-code-php](https://github.com/fikoborquez/clean-code-php)
-* :brazil: **Portuguese:**
-   * [fabioars/clean-code-php](https://github.com/fabioars/clean-code-php)
-   * [jeanjar/clean-code-php](https://github.com/jeanjar/clean-code-php/tree/pt-br)
-* :thailand: **Thai:**
-   * [panuwizzle/clean-code-php](https://github.com/panuwizzle/clean-code-php)
-* :fr: **French:**
-   * [errorname/clean-code-php](https://github.com/errorname/clean-code-php)
-* :vietnam: **Vietnamese**
-   * [viethuongdev/clean-code-php](https://github.com/viethuongdev/clean-code-php)
-* :kr: **Korean:**
-   * [yujineeee/clean-code-php](https://github.com/yujineeee/clean-code-php)
-* :tr: **Turkish:**
-   * [anilozmen/clean-code-php](https://github.com/anilozmen/clean-code-php)
-   
-**[⬆ back to top](#table-of-contents)**
