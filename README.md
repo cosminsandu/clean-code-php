@@ -67,7 +67,7 @@ Quote by Robert C. Martin:
 
 ## Meaningful names
 Quote by Phil Karlton:
-> There are only two hard things in Computer Science: cache invalidation and naming things.
+> "There are only two hard things in Computer Science: cache invalidation and naming things."
 
 ### Use meaningful and pronounceable variable names
 
@@ -436,14 +436,14 @@ The comparison `$a !== $b` returns `TRUE`.
 ## Functions
 
 ### Small
-> The first rule of functions is that they should be small. 
-> The second rule of functions is that they _should be smaller than that_.
+> "The first rule of functions is that they should be small. 
+> The second rule of functions is that they _should be smaller than that_."
 
 ### Functions should do one thing
 Uncle Bob said: 
-> Function should do one thing.
+> "Function should do one thing.
 > They should do it well.
-> They should do it only.
+> They should do it only."
 
 This is by far the most important rule in software engineering. When functions do more 
 than one thing, they are harder to compose, test, and reason about. When you can isolate 
