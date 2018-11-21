@@ -3,7 +3,7 @@
 ## Table of Contents
 
   1. [Introduction](#introduction)
-  2. [Variables](#variables)
+  2. [Meaningful names](#meaningful-names)
      * [Use meaningful and pronounceable variable names](#use-meaningful-and-pronounceable-variable-names)
      * [Use the same vocabulary for the same type of variable](#use-the-same-vocabulary-for-the-same-type-of-variable)
      * [Use searchable names (part 1)](#use-searchable-names-part-1)
@@ -17,10 +17,11 @@
   3. [Comparison](#comparison)
      * [Use identical comparison](#use-identical-comparison)
   4. [Functions](#functions)
-     * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
+     * [Small](#small)
      * [Functions should do one thing](#functions-should-do-one-thing)
      * [Function names should say what they do](#function-names-should-say-what-they-do)
      * [Functions should only be one level of abstraction](#functions-should-only-be-one-level-of-abstraction)
+     * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
      * [Don't use flags as function parameters](#dont-use-flags-as-function-parameters)
      * [Avoid Side Effects](#avoid-side-effects)
      * [Don't write to global functions](#dont-write-to-global-functions)
@@ -58,11 +59,15 @@ Not every principle herein has to be strictly followed, and even fewer will be u
 agreed upon. These are guidelines and nothing more, but they are ones codified over many 
 years of collective experience by the authors of *Clean Code*.
 
-Inspired from [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
-
 Although many developers still use PHP 5, most of the examples in this article only work with PHP 7.1+.
 
-## Variables
+Quote by Robert C. Martin:
+> "Writing clean code is what you must do in order to call yourself a professional.
+> There is no reasonable excuse for doing anything less than your best." 
+
+## Meaningful names
+Quote by Phil Karlton:
+> There are only two hard things in Computer Science: cache invalidation and naming things.
 
 ### Use meaningful and pronounceable variable names
 
@@ -81,6 +86,7 @@ $currentDate = $moment->format('y-m-d');
 **[⬆ back to top](#table-of-contents)**
 
 ### Use the same vocabulary for the same type of variable
+A.k.a `Pick one word per concept` rule.
 
 **Bad:**
 
@@ -429,58 +435,20 @@ The comparison `$a !== $b` returns `TRUE`.
 
 ## Functions
 
-### Function arguments (2 or fewer ideally)
-
-Limiting the amount of function parameters is incredibly important because it makes 
-testing your function easier. Having more than three leads to a combinatorial explosion 
-where you have to test tons of different cases with each separate argument.
-
-Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
-Anything more than that should be consolidated. Usually, if you have more than two 
-arguments then your function is trying to do too much. In cases where it's not, most 
-of the time a higher-level object will suffice as an argument.
-
-**Bad:**
-
-```php
-function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
-{
-    // ...
-}
-```
-
-**Good:**
-
-```php
-class MenuConfig
-{
-    public $title;
-    public $body;
-    public $buttonText;
-    public $cancellable = false;
-}
-
-$config = new MenuConfig();
-$config->title = 'Foo';
-$config->body = 'Bar';
-$config->buttonText = 'Baz';
-$config->cancellable = true;
-
-function createMenu(MenuConfig $config): void
-{
-    // ...
-}
-```
-
-**[⬆ back to top](#table-of-contents)**
+### Small
+> The first rule of functions is that they should be small. 
+> The second rule of functions is that they _should be smaller than that_.
 
 ### Functions should do one thing
+Uncle Bob said: 
+> Function should do one thing.
+> They should do it well.
+> They should do it only.
 
 This is by far the most important rule in software engineering. When functions do more 
 than one thing, they are harder to compose, test, and reason about. When you can isolate 
 a function to just one action, they can be refactored easily and your code will read much 
-cleaner. If you take nothing else away from this guide other than this, you'll be ahead 
-of many developers.
+cleaner. 
 
 **Bad:**
 ```php
@@ -520,6 +488,10 @@ function isClientActive(int $client): bool
 **[⬆ back to top](#table-of-contents)**
 
 ### Function names should say what they do
+Ward's principle:
+> "You know you are waking on clean code when each routine turns out to be pretty much what you expected."
+
+
 
 **Bad:**
 
@@ -692,6 +664,51 @@ class BetterJSAlternative
             // parse...
         }
     }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Function arguments (2 or fewer ideally)
+
+Limiting the amount of function parameters is incredibly important because it makes 
+testing your function easier. Having more than three leads to a combinatorial explosion 
+where you have to test tons of different cases with each separate argument.
+
+Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
+Anything more than that should be consolidated. Usually, if you have more than two 
+arguments then your function is trying to do too much. In cases where it's not, most 
+of the time a higher-level object will suffice as an argument.
+
+**Bad:**
+
+```php
+function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
+{
+    // ...
+}
+```
+
+**Good:**
+
+```php
+class MenuConfig
+{
+    public $title;
+    public $body;
+    public $buttonText;
+    public $cancellable = false;
+}
+
+$config = new MenuConfig();
+$config->title = 'Foo';
+$config->body = 'Bar';
+$config->buttonText = 'Baz';
+$config->cancellable = true;
+
+function createMenu(MenuConfig $config): void
+{
+    // ...
 }
 ```
 
