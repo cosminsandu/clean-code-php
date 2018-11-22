@@ -24,6 +24,7 @@
      * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
      * [Don't use flags as function parameters](#dont-use-flags-as-function-parameters)
      * [Avoid Side Effects](#avoid-side-effects)
+     * [Command Query separation](#command-query-separation)
      * [Don't write to global functions](#dont-write-to-global-functions)
      * [Don't use a Singleton pattern](#dont-use-a-singleton-pattern)
      * [Encapsulate conditionals](#encapsulate-conditionals)
@@ -65,6 +66,10 @@ Quote by Robert C. Martin:
 ## Meaningful names
 Quote by Phil Karlton:
 > "There are only two hard things in Computer Science: cache invalidation and naming things."
+
+Booleans name should answer yes /no.
+Functions names are verbs, eg. `searchProduct()`, `sendTransaction()`.
+Classes are nouns `Customer`, `OderDetails`.
 
 ### Use meaningful and pronounceable variable names
 
@@ -480,6 +485,15 @@ function isClientActive(int $client): bool
 **[⬆ back to top](#table-of-contents)**
 
 ### Function names should say what they do
+
+Function name should be verbs (or verb phase):
+```php
+searchProduct();
+sendTransaction();
+deletePage();
+save();
+```
+
 Ward's principle:
 > "You know you are waking on clean code when each routine turns out to be pretty much what you expected."
 
@@ -737,7 +751,7 @@ function createTempFile(string $name): void
 
 ### Avoid Side Effects
 
-A function produces a side effect if it does anything other than take a value in and return another value or values. 
+Side effects are lies. Your function promises to do one thing, but it also does other _hidden_ things.
 A side effect could be writing to a file, modifying some global variable, or accidentally wiring all your money to a stranger.
 
 Now, you do need to have side effects in a program on occasion. 
@@ -784,6 +798,18 @@ var_dump($name); // 'Ryan McDermott';
 var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
+### Command Query Separation
+
+Functions should should be either a `query` or a `command`.
+A command is defined as a method that performs an action (changes state) - it returns void.
+A query only returns a value and do not change the observable state of the system - [no side effects](#avoid-side-effects).
+Either your function should change the state of an object, or is should return some information about that object.  
+
+//TODO: add php example
+
+See Command Query Responsibility Segregation/CQRS
 **[⬆ back to top](#table-of-contents)**
 
 ### Don't write to global functions
