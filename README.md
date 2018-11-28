@@ -73,7 +73,17 @@ Classes are nouns `Customer`, `OderDetails`.
 
 ### Use meaningful and pronounceable variable names
 
-https://github.com/cosminsandu/clean-code-php/blob/f242edfa2d8d945a96cbeb82a173d84400db5eda/src/meaningful-and-pronounceable-variable-names.php#L3-L7
+**Bad:**
+
+```php
+$ymdstr = $moment->format('y-m-d');
+```
+
+**Good:**
+
+```php
+$currentDate = $moment->format('y-m-d');
+```
 
 **[⬆ back to top](#table-of-contents)**
 
